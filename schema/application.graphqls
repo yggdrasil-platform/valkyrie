@@ -1,0 +1,14 @@
+type Application {
+  alias: String!
+  description: String
+  id: ID!
+  internal: Boolean!
+  name: String!
+  url: String!
+}
+
+type Query {
+  getApplication: [Application]!
+  getApplicationByAlias(alias: String!): Application
+  getApplicationById(id: Int!): Application
+}
