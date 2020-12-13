@@ -1,17 +1,12 @@
 package database
 
 import (
-	"fmt"
-	"github.com/kieranroneill/valkyrie/pkg/logger"
-	"github.com/kieranroneill/valkyrie/pkg/model"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
-	"os"
+  "fmt"
+  "github.com/kieranroneill/valkyrie/pkg/logger"
+  "gorm.io/driver/postgres"
+  "gorm.io/gorm"
+  "os"
 )
-
-func RunMigrations(db *gorm.DB) error {
-  return db.AutoMigrate(&model.Application{})
-}
 
 func New() (*gorm.DB, error) {
 	dbPort := "5432"

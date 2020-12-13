@@ -24,6 +24,11 @@ func New() (*Application, error) {
     logger.Error.Printf("failed to run database migrations: %s", err)
   }
 
+  // Run db seeds
+  if err = database.RunSeeds(db); err != nil {
+    logger.Error.Printf("failed to run database seeds: %s", err)
+  }
+
   return &Application{
     Config: config.New(),
     Database: db,

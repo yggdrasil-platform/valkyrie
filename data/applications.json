@@ -1,0 +1,16 @@
+[
+  {
+    "alias": "mimir",
+    "description": "Handles authentication",
+    "internal": true,
+    "name": "Mimir",
+    "url": "http://mimir:3000"
+  },
+  {
+    "alias": "valhalla",
+    "description": "Handles account and user information",
+    "internal": true,
+    "name": "Valhalla",
+    "url": "http://valhalla:3000"
+  }
+]

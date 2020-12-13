@@ -94,10 +94,10 @@ curl -X GET http://localhost:${PORT}/healthcheck
 When building the Docker image, we want to inject env vars at build time, as the [`Dockerfile`](./Dockerfile) injects the build args as env vars into the container.
 ```bash
 docker build \
--t kieranroneill/new_go_service_template \
+-t kieranroneill/valkyrie \
 --build-arg env=production \
 --build-arg port=3000 \
---build-arg service_name=new-go-service-template \
+--build-arg service_name=valkyrie \
 --build-arg version=$(<VERSION) \
 .
 ```
@@ -106,8 +106,8 @@ docker build \
 
 ```bash
 docker run \
---name new_go_service_template \
+--name valkyrie \
 -it \
 -p 1337:${PORT} \
-kieranroneill/new_go_service_template:latest
+kieranroneill/valkyrie:latest
 ```
