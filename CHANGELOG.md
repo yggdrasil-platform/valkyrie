@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/kieranroneill/valkyrie/compare/v1.0.0...v1.1.0) (2020-12-14)
+
+
+### Features
+
+* updates the seeds ([c6edc55](https://github.com/kieranroneill/valkyrie/commit/c6edc55b54c3931cd026514e956ec7d174702f21))
+
 # 1.0.0 (2020-12-13)
 
 
