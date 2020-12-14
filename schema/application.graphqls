@@ -2,8 +2,8 @@ type Application {
   alias: String!
   description: String
   id: ID!
-  internal: Boolean!
   name: String!
+  public: Boolean!
   url: String!
 }
 

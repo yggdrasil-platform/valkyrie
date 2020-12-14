@@ -46,8 +46,8 @@ type ComplexityRoot struct {
 		Alias       func(childComplexity int) int
 		Description func(childComplexity int) int
 		ID          func(childComplexity int) int
-		Internal    func(childComplexity int) int
 		Name        func(childComplexity int) int
+		Public      func(childComplexity int) int
 		Url         func(childComplexity int) int
 	}
 
@@ -100,19 +100,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Application.ID(childComplexity), true
 
-	case "Application.internal":
-		if e.complexity.Application.Internal == nil {
-			break
-		}
-
-		return e.complexity.Application.Internal(childComplexity), true
-
 	case "Application.name":
 		if e.complexity.Application.Name == nil {
 			break
 		}
 
 		return e.complexity.Application.Name(childComplexity), true
+
+	case "Application.public":
+		if e.complexity.Application.Public == nil {
+			break
+		}
+
+		return e.complexity.Application.Public(childComplexity), true
 
 	case "Application.url":
 		if e.complexity.Application.Url == nil {
@@ -206,8 +206,8 @@ var sources = []*ast.Source{
   alias: String!
   description: String
   id: ID!
-  internal: Boolean!
   name: String!
+  public: Boolean!
   url: String!
 }
 
@@ -409,41 +409,6 @@ func (ec *executionContext) _Application_id(ctx context.Context, field graphql.C
 	return ec.marshalNID2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Application_internal(ctx context.Context, field graphql.CollectedField, obj *model.Application) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:     "Application",
-		Field:      field,
-		Args:       nil,
-		IsMethod:   false,
-		IsResolver: false,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Internal, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(bool)
-	fc.Result = res
-	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
-}
-
 func (ec *executionContext) _Application_name(ctx context.Context, field graphql.CollectedField, obj *model.Application) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -477,6 +442,41 @@ func (ec *executionContext) _Application_name(ctx context.Context, field graphql
 	res := resTmp.(string)
 	fc.Result = res
 	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Application_public(ctx context.Context, field graphql.CollectedField, obj *model.Application) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Application",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Public, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Application_url(ctx context.Context, field graphql.CollectedField, obj *model.Application) (ret graphql.Marshaler) {
@@ -1816,13 +1816,13 @@ func (ec *executionContext) _Application(ctx context.Context, sel ast.SelectionS
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "internal":
-			out.Values[i] = ec._Application_internal(ctx, field, obj)
+		case "name":
+			out.Values[i] = ec._Application_name(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "name":
-			out.Values[i] = ec._Application_name(ctx, field, obj)
+		case "public":
+			out.Values[i] = ec._Application_public(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}

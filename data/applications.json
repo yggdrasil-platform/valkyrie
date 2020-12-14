@@ -2,15 +2,15 @@
   {
     "alias": "mimir",
     "description": "Handles authentication",
-    "internal": true,
     "name": "Mimir",
+    "public": false,
     "url": "http://mimir:3000"
   },
   {
     "alias": "valhalla",
     "description": "Handles account and user information",
-    "internal": true,
     "name": "Valhalla",
+    "public": true,
     "url": "http://valhalla:3000"
   }
 ]
